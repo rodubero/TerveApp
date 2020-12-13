@@ -1,113 +1,120 @@
 <%- include('./partials/head.ejs') %>
 <script src="../../static/reportingCode.js" defer></script>
 <%- include('./partials/headerLogged.ejs') %>
-<h1>Reporting dashboard</h1>
-<p>Add your daily data in the morning or evening</p>
-<ul class="nav nav-tabs" id="homeTab" role="tablist">
-    <li class="nav-item" role="presentation">
-      <a class="nav-link active" id="morning-tab" data-bs-toggle="tab" href="#morning" role="tab" aria-controls="morning" aria-selected="true">Morning</a>
-    </li>
-    <li class="nav-item" role="presentation">
-      <a class="nav-link" id="eveninge-tab" data-bs-toggle="tab" href="#evening" role="tab" aria-controls="evening" aria-selected="false">Evening</a>
-    </li>
-</ul>
-<div class="tab-content" id="reportTabContent">
-    <div class="tab-pane fade show active" id="morning" role="tabpanel" aria-labelledby="moring-tab">
-        <form method="POST" action="/behavior/reporting/morning" class="row justify-content-around">
-            <div class="col-auto gy-3 align-self-start">
-                <label for="date" class="form-label">Report date</label>
-                <div class="col-10">
-                    <input type="date" class="form-control" name="dateM" id="dateM" value="<%= reports.date %>" required>
-                </div>
-            </div>
-            <div class="col-auto align-self-center">
-                <div class="row align-self-center">
-                    <div class="col gy-3 align-self-center">
-                        <label for="sleepT" class="form-label">Sleep duration (In hours with 1 decimal)</label>
-                        <div class="col-md-4">
-                            <input type="number" step="0.1" class="form-control" min="0" max="24" id="sleepT" name='sleepT' value="0" required>
-                        </div>
-                    </div>
-                </div>
-                <div class="row gy-3 align-self-center ">
-                    <div class="col gy-3 align-self-center">
-                        <label for="sleepQ" class="form-label">Sleep quality (0 is bad, 5 for magic pillows)</label>
-                        <div class="input-group">
-                            <div class="input-group-text" id="sleepQVal" >5</div>
-                            <div class="input-group-text"><input type="range" class="form-range" value="5" min="0" max="5" step="1" id="sleepQ" name='sleepQ'></div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-            <div class="col-auto gy-3 align-self-start">
-                <label for="moodM" class="form-label">Generic mood (0 is bad :( 5 is super!)</label>
-                <div class="input-group">
-                    <div class="input-group-text" id="moodMVal" >5</div>
-                    <div class="input-group-text"><input type="range" class="form-range" value="5" min="0" max="5" step="1" id="moodM" name='moodM'></div>
-                </div>
-            </div>
-            <div class="row justify-content-end gy-3">
-                <button type="submit" class="btn btn-primary col-3">Submit!</button>
-            </div>
-        </form>
+<div class="row gy-2">
+    <div class="row gy-2">
+        <h1>Reporting dashboard</h1>
+        <p>Add your daily data in the morning or evening</p>
     </div>
-    <div class="tab-pane fade" id="evening" role="tabpanel" aria-labelledby="evening-tab">
-        <form method="POST" action="/behavior/reporting/evening" class="row justify-content-around">
-            <div class="col-auto gy-3 align-self-start">
-                <label for="date" class="form-label">Report date</label>
-                <div class="col-10">
-                    <input type="date" class="form-control" name="dateE" id="dateE" value="<%= reports.date %>" required>
-                </div>
-            </div>
-            <div class="col-auto align-self-center">
-                <div class="row align-self-center">
-                    <div class="col gy-3 align-self-center">
-                        <label for="sportsT" class="form-label">Time spent on sports and exercise (in hours with 1 decimal)</label>
-                        <div class="col-md-3">
-                            <input type="number" step="0.1" class="form-control" min="0" max="24" id="sportsT" value="0" name='sportsT'>
+    <div class="row gy-1">
+        <ul class="nav nav-tabs" id="homeTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a class="nav-link active" id="morning-tab" data-bs-toggle="tab" href="#morning" role="tab" aria-controls="morning" aria-selected="true">Morning</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="eveninge-tab" data-bs-toggle="tab" href="#evening" role="tab" aria-controls="evening" aria-selected="false">Evening</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="reportTabContent">
+            <div class="tab-pane fade show active" id="morning" role="tabpanel" aria-labelledby="moring-tab">
+                <form method="POST" action="/behavior/reporting/morning" class="row justify-content-around">
+                    <div class="col-auto gy-3 align-self-start">
+                        <label for="date" class="form-label">Report date</label>
+                        <div class="col-10">
+                            <input type="date" class="form-control" name="dateM" id="dateM" value="<%= reports.date %>" required>
                         </div>
                     </div>
-                </div>
-                <div class="row align-self-center">
-                    <div class="col gy-3 align-self-center">
-                        <label for="studyT" class="form-label">Time spent studying (in hours with 1 decimal)</label>
-                        <div class="col-md-3">
-                            <input type="number" step="0.1" class="form-control" min="0" max="24" id="studyT" value="0" name='studyT'>
+                    <div class="col-auto align-self-center">
+                        <div class="row align-self-center">
+                            <div class="col gy-3 align-self-center">
+                                <label for="sleepT" class="form-label">Sleep duration (In hours with 1 decimal)</label>
+                                <div class="col-md-4">
+                                    <input type="number" step="0.1" class="form-control" min="0" max="24" id="sleepT" name='sleepT' value="0" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gy-3 align-self-center ">
+                            <div class="col gy-3 align-self-center">
+                                <label for="sleepQ" class="form-label">Sleep quality (0 is bad, 5 is like Rapunzel)</label>
+                                <div class="input-group">
+                                    <div class="input-group-text" id="sleepQVal" >5</div>
+                                    <div class="input-group-text"><input type="range" class="form-range" value="5" min="0" max="5" step="1" id="sleepQ" name='sleepQ'></div>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
-                </div>                
-            </div>
-            <div class="col-auto gy-3 align-self-start">
-                <div class="row align-self-center">
-                    <div class="col align-self-center">
-                        <label for="eatingR" class="form-label">Regularity and quality of eating (0 is bad, 5 is yum!)</label>
+                    <div class="col-auto gy-3 align-self-start">
+                        <label for="moodM" class="form-label">Generic mood (0 is bad :( 5 is super!)</label>
                         <div class="input-group">
-                            <div class="input-group-text" id="eatingRVal" >5</div>
-                            <div class="input-group-text"><input type="range" class="form-range" min="0" max="5" step="1" value="5" id="eatingR" name='eatingR'></div>
+                            <div class="input-group-text" id="moodMVal" >5</div>
+                            <div class="input-group-text"><input type="range" class="form-range" value="5" min="0" max="5" step="1" id="moodM" name='moodM'></div>
                         </div>
                     </div>
-                </div>
-                <div class="row align-self-center">
-                    <div class="col gy-3 align-self-center">
-                        <label for="moodE" class="form-label">Generic mood (0 is bad, 5 is super!)</label>
-                        <div class="input-group">
-                            <div class="input-group-text" id="moodEVal" >5</div>
-                            <div class="input-group-text"><input type="range" class="form-range" min="0" max="5" step="1" value="5" id="moodE" name='moodE'></div>
+                    <div class="row justify-content-end gy-3">
+                        <button type="submit" class="btn btn-primary col-3">Submit!</button>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="evening" role="tabpanel" aria-labelledby="evening-tab">
+                <form method="POST" action="/behavior/reporting/evening" class="row justify-content-around">
+                    <div class="col-auto gy-3 align-self-start">
+                        <label for="date" class="form-label">Report date</label>
+                        <div class="col-10">
+                            <input type="date" class="form-control" name="dateE" id="dateE" value="<%= reports.date %>" required>
                         </div>
                     </div>
-                </div>
+                    <div class="col-auto align-self-center">
+                        <div class="row align-self-center">
+                            <div class="col gy-3 align-self-center">
+                                <label for="sportsT" class="form-label">Time spent on sports and exercise (in hours with 1 decimal)</label>
+                                <div class="col-md-3">
+                                    <input type="number" step="0.1" class="form-control" min="0" max="24" id="sportsT" value="0" name='sportsT'>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-self-center">
+                            <div class="col gy-3 align-self-center">
+                                <label for="studyT" class="form-label">Time spent studying (in hours with 1 decimal)</label>
+                                <div class="col-md-3">
+                                    <input type="number" step="0.1" class="form-control" min="0" max="24" id="studyT" value="0" name='studyT'>
+                                </div>
+                            </div>
+                        </div>                
+                    </div>
+                    <div class="col-auto gy-3 align-self-start">
+                        <div class="row align-self-center">
+                            <div class="col align-self-center">
+                                <label for="eatingR" class="form-label">Regularity and quality of eating (0 is bad, 5 is yum!)</label>
+                                <div class="input-group">
+                                    <div class="input-group-text" id="eatingRVal" >5</div>
+                                    <div class="input-group-text"><input type="range" class="form-range" min="0" max="5" step="1" value="5" id="eatingR" name='eatingR'></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-self-center">
+                            <div class="col gy-3 align-self-center">
+                                <label for="moodE" class="form-label">Generic mood (0 is bad, 5 is super!)</label>
+                                <div class="input-group">
+                                    <div class="input-group-text" id="moodEVal" >5</div>
+                                    <div class="input-group-text"><input type="range" class="form-range" min="0" max="5" step="1" value="5" id="moodE" name='moodE'></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-end gy-3">
+                        <button type="submit" class="btn btn-primary col-3">Submit!</button>
+                    </div>
+                </form>
             </div>
-            <div class="row justify-content-end gy-3">
-                <button type="submit" class="btn btn-primary col-3">Submit!</button>
-            </div>
-        </form>
+        </div>
     </div>
-    <div class="mb-3">
+    
+    <div class="row gy-3">
         <% if (errors && errors.length > 0) { %>
             <% errors.forEach((error) => { %>
-                <div class="mb-3">
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div class="row">
+                    <div class="alert alert-danger alert-dismissible fade show col-auto" role="alert">
                         <strong>Error: </strong> <%= error %>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
@@ -116,31 +123,33 @@
         <% } %>
         <% if (notifs && notifs.length > 0) { %>
             <% notifs.forEach((notif) => { %>
-                <div class="mb-3">
-                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <div class="row">
+                    <div class="alert alert-primary alert-dismissible fade show col-auto" role="alert">
                         <strong>Notification: </strong> <%= notif %>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                 </div>
             <% }); %>
         <% } %>
-    </div>
-    <div class="mb-3">
         <% if (reports) { %>
             <% if (reports.morning) { %>
-                <div class="alert alert-success" role="alert">
-                <strong>Reminder: </strong> You have already submitted your <strong>morning</strong> report for today!
+                <div class="row">
+                    <div class="alert alert-success col-12" role="alert">
+                        <strong>Reminder: </strong> You have already submitted your <strong>morning</strong> report for today!
+                        </div>
                 </div>
+                
             <% }; %>
             <% if (reports.evening) { %>
-                <div class="alert alert-success" role="alert">
-                <strong>Reminder: </strong> You have already submitted your <strong>evening</strong> report for today! 
+                <div class="row">
+                    <div class="alert alert-success col-12" role="alert">
+                        <strong>Reminder: </strong> You have already submitted your <strong>evening</strong> report for today! 
+                        </div>
                 </div>
             <% }; %>
         <% } %>
     </div>
 </div>
-  
 <%- include('./partials/footer.ejs') %>
 
 
