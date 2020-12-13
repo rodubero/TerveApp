@@ -21,7 +21,7 @@ const morningReport = async(report) => {
     await executeQuery("INSERT INTO morning (userId, date, sleepDuration, sleepQuality, genericMood) VALUES ($1, $2, $3, $4, $5);", report.userId, report.date, report.sleepT, report.sleepQ, report.genericM);
 }
 const eveningReport = async(report) => {
-    await executeQuery("INSERT INTO evening (userId, date, sportsTime, exerciseTime, studyTime, eatingRegularity, eatingQuality, genericMood) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);", report.userId, report.date, report.sportsT, report.exerciseT, report.studyT, report.eatingR, report.eatingQ, report.genericM);
+    await executeQuery("INSERT INTO evening (userId, date, sportsTime, studyTime, eatingRegularity, eatingQuality, genericMood) VALUES ($1, $2, $3, $4, $5, $6, $7);", report.userId, report.date, report.sportsT, report.studyT, report.eatingR, report.eatingQ, report.genericM);
 }
 
 const todayReport = async (id) => {

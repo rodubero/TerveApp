@@ -42,7 +42,6 @@ const eveningReport = async({request, session, render}) => {
     const paramet = await body.value;
     const date = await paramet.get('date');
     const sportsT = await paramet.get('sportsT');
-    const exerciseT = await paramet.get('exerciseT');
     const studyT = await paramet.get('studyT');
     const eatingR = await paramet.get('eatingR');
     const eatingQ = await paramet.get('eatingQ');
@@ -58,7 +57,6 @@ const eveningReport = async({request, session, render}) => {
             userId : user.id,
             date : date,
             sportsT : sportsT,
-            exerciseT : exerciseT,
             studyT : studyT,
             eatingR : eatingR,
             eatingQ : eatingQ,

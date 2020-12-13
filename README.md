@@ -33,8 +33,7 @@ CREATE TABLE evening (
     id SERIAL PRIMARY KEY,
     date DATE NOT NULL,
     userId INTEGER REFERENCES users(id),
-    sportTime INTEGER NOT NULL,
-    exerciseTime INTEGER NOT NULL,
+    sportsTime INTEGER NOT NULL,
     studyTime INTEGER NOT NULL,
     eatingRegularity INTEGER NOT NULL,
     eatingQuality INTEGER NOT NULL,
@@ -47,6 +46,10 @@ Run the app locally:
 Use enviromental variables to insert your database credentials
 
 PGPORT=5432 PGDATABASE=my_db PGHOST=something_at_possibly.elephantsql.com etcetc deno run
+
+URL: localhost:7777
+
+
 
 Access the app online:
 
