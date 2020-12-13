@@ -11,26 +11,29 @@
 </ul>
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-        <form method="POST" action="/behavior/reporting/morning" class="row gy-2 gx-4 align-items-center">
-            <div class="col-auto">
-            <label for="date" class="form-label">Report date</label>
-            <input type="date" class="form-control" name="date" id="date" value="<%= reports.date %>" required>
+        <form method="POST" action="/behavior/reporting/morning" class="row g-3">
+            <div class="col-md-2">
+                <label for="date" class="form-label">Report date</label>
+                <input type="date" class="form-control" name="date" id="date" value="<%= reports.date %>" required>
             </div>
-            <div class="col-auto">
+            
+            <div class="col-md-3">
                 <label for="sleepT" class="form-label">Sleep duration (In hours with decimals)</label>
-                <input type="number" class="form-control" min="0" max="24" id="sleepT" name='sleepT'>
+                <input type="number" class="form-control" min="0" max="24" id="sleepT" name='sleepT' value="0" required>
             </div>
-            <div class="col-auto">
-                <label for="sleepQ" class="form-label">Sleep quality</label>
+            <label for="sleepQ" class="form-label">Sleep quality (0 is bad, 5 for magic pillows)</label>
+            <div class="input-group">
                 <div class="input-group-text">0</div>
-                <input type="range" class="form-range" min="0" max="5" step="1" id="sleepQ" name='sleepQ'>
-                <div class="input-group-text">5</div>
+                <div class="input-group-text"><input type="range" class="form-range" min="0" max="5" step="1" id="sleepQ" name='sleepQ'></div>
             </div>
-            <div class="col-auto">
-                <label for="mood" class="form-label">Generic mood</label>
-                <input type="range" class="form-range" min="0" max="5" step="1" id="mood" name='mood'>
+            <label for="mood" class="form-label">Generic mood (0 is Bad :( 5 is Super!)</label>
+            <div class="input-group">
+                <div class="input-group-text">0</div>
+                <div class="input-group-text"><input type="range" class="form-range" min="0" max="5" step="1" id="mood" name='mood'></div>
             </div>
-            <button type="submit" class="btn btn-primary">Confirm</button>
+            <div class="col-2">
+                <button type="submit" class="btn btn-primary">Submit!"</button>
+            </div>
         </form>
     </div>
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -49,11 +52,11 @@
                     <input type="number" class="form-control" min="0" max="24" id="studyT" name='studyT'>
                 </div>
                 <div class="col-auto">
-                    <label for="eatingR" class="form-label">Regularity and quality of eating </label>
+                    <label for="eatingR" class="form-label">Regularity and quality of eating (0 is bad, 5 is yum!)</label>
                     <input type="range" class="form-range" min="0" max="5" step="1" id="eatingR" name='eatingR'>
                 </div>
                 <div class="col-auto">
-                    <label for="mood" class="form-label">Generic mood</label>
+                    <label for="mood" class="form-label">Generic mood (0 is bad, 5 is super!)</label>
                     <input type="range" class="form-range" min="0" max="5" step="1" id="mood" name='mood'>
                 </div>
                 <button type="submit" class="btn btn-primary">Confirm</button>

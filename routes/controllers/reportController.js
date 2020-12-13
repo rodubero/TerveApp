@@ -50,7 +50,6 @@ const eveningReport = async({request, session, render}) => {
     let notif = [];
 
     const reportObj = await reportSrvcs.findReport(user.id, date, false);
-    console.log(!reportObj.hasOwnProperty('id'));
     if (!reportObj.hasOwnProperty('id')){
         const report = {
             userId : user.id,

@@ -6,7 +6,7 @@ const index = async({render}) => {
   render('index.ejs');
 };
 const register = async({render}) => {
-  render('register.ejs', {errors:[], notifs: []});
+  render('register.ejs', {errors:[], notifs: [], user : {email:""}});
 };
 
 

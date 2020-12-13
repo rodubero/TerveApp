@@ -26,7 +26,7 @@ CREATE TABLE morning (
     id SERIAL PRIMARY KEY,
     date DATE NOT NULL,
     userId INTEGER REFERENCES users(id),
-    sleepDuration INTEGER NOT NULL,
+    sleepDuration FLOAT NOT NULL,
     sleepQuality INTEGER NOT NULL,
     genericMood INTEGER NOT NULL
 );
@@ -37,8 +37,8 @@ CREATE TABLE evening (
     id SERIAL PRIMARY KEY,
     date DATE NOT NULL,
     userId INTEGER REFERENCES users(id),
-    sportsTime INTEGER NOT NULL,
-    studyTime INTEGER NOT NULL,
+    sportsTime FLOAT NOT NULL,
+    studyTime FLOAT NOT NULL,
     eatingRegularity INTEGER NOT NULL,
     genericMood INTEGER NOT NULL
 );

@@ -7,7 +7,7 @@
   <form method="POST" action="/auth/registration" style="width: 400px;">
     <div class="mb-3">
       <label for="email" class="form-label">Email address</label>
-      <input type="email" class="form-control" name="email" aria-describedby="emailHelp" id="email" required>
+      <input type="email" class="form-control" name="email" aria-describedby="emailHelp" id="email" value="<%= user.email %>" required>
       <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
     </div>
     <div class="mb-3">
@@ -23,6 +23,7 @@
               <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>Error: </strong> <%= error %>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
             <% }); %>
     <% } %>
     <% if (notifs && notifs.length > 0) { %>
