@@ -1,6 +1,6 @@
 # TerveApp
  CS/C3170
-Hi, this is Terve App an app for tracking your daily lifestyle data.
+Hi, this is Terve App an app for tracking your daily lifestyle info.
 
 You can track:
 
@@ -20,6 +20,8 @@ CREATE TABLE users (
 
 CREATE UNIQUE INDEX ON users((lower(email)));
 
+
+
 CREATE TABLE morning (
     id SERIAL PRIMARY KEY,
     date DATE NOT NULL,
@@ -29,6 +31,8 @@ CREATE TABLE morning (
     genericMood INTEGER NOT NULL
 );
 
+
+
 CREATE TABLE evening (
     id SERIAL PRIMARY KEY,
     date DATE NOT NULL,
@@ -36,7 +40,6 @@ CREATE TABLE evening (
     sportsTime INTEGER NOT NULL,
     studyTime INTEGER NOT NULL,
     eatingRegularity INTEGER NOT NULL,
-    eatingQuality INTEGER NOT NULL,
     genericMood INTEGER NOT NULL
 );
 

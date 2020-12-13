@@ -44,7 +44,6 @@ const eveningReport = async({request, session, render}) => {
     const sportsT = await paramet.get('sportsT');
     const studyT = await paramet.get('studyT');
     const eatingR = await paramet.get('eatingR');
-    const eatingQ = await paramet.get('eatingQ');
     const mood = await paramet.get('mood');
     const user = await session.get('user');
     let error = [];
@@ -59,7 +58,6 @@ const eveningReport = async({request, session, render}) => {
             sportsT : sportsT,
             studyT : studyT,
             eatingR : eatingR,
-            eatingQ : eatingQ,
             genericM : mood
         }
         reportSrvcs.eveningReport(report);
