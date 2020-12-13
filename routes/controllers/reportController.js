@@ -10,10 +10,10 @@ const morningReport = async({request, session, render}) => {
 
     const body = request.body();
     const paramet = await body.value;
-    const date = await paramet.get('date');
+    const date = await paramet.get('dateM');
     const sleepT = await paramet.get('sleepT');
     const sleepQ = await paramet.get('sleepQ');
-    const mood = await paramet.get('mood');
+    const mood = await paramet.get('moodM');
     const user = await session.get('user');
     let error = [];
     let notif = [];
@@ -40,11 +40,11 @@ const morningReport = async({request, session, render}) => {
 const eveningReport = async({request, session, render}) => {
     const body = request.body();
     const paramet = await body.value;
-    const date = await paramet.get('date');
+    const date = await paramet.get('dateE');
     const sportsT = await paramet.get('sportsT');
     const studyT = await paramet.get('studyT');
     const eatingR = await paramet.get('eatingR');
-    const mood = await paramet.get('mood');
+    const mood = await paramet.get('moodE');
     const user = await session.get('user');
     let error = [];
     let notif = [];
