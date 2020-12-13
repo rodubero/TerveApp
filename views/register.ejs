@@ -1,0 +1,40 @@
+<%- include('./partials/header.ejs') %>
+<div class="mb-3">
+<h1>Welcome to Terve!</h1>
+<p>The app </p>
+<h2>Register</h2>
+
+  <form method="POST" action="/auth/registration" style="width: 400px;">
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input type="email" class="form-control" name="email" aria-describedby="emailHelp" id="email" required>
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" name="password" id="password" minlength="4" required>
+    </div>
+    <div class="mb-3">
+        <label for="passwordV" class="form-label">Confirm password</label>
+        <input type="password" class="form-control" name="passwordV" id="passwordV" minlength="4" required>
+      </div>
+      <% if (errors && errors.length > 0) { %>
+            <% errors.forEach((error) => { %>
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error: </strong> <%= error %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <% }); %>
+    <% } %>
+    <% if (notifs && notifs.length > 0) { %>
+        <% notifs.forEach((notif) => { %>
+          <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            <strong>Error: </strong> <%= notif %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% }); %>
+    <% } %>    
+    <button type="submit" class="btn btn-primary">Register!</button>
+  </form>
+</div>
+
+  <%- include('./partials/footer.ejs') %>

@@ -1,0 +1,111 @@
+<%- include('./partials/headerLogged.ejs') %>
+<h1>Reporting dashboard</h1>
+<p>Add your daily data in the morning or evening</p>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Morning</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Evening</a>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <form method="POST" action="/behavior/reporting/morning" class="row gy-2 gx-4 align-items-center">
+            <div class="col-auto">
+            <label for="date" class="form-label">Report date</label>
+            <input type="date" class="form-control" name="date" id="date" value="<%= reports.date %>" required>
+            </div>
+            <div class="col-auto">
+                <label for="sleepT" class="form-label">Sleep duration (In hours with decimals)</label>
+                <input type="number" class="form-control" min="0" max="24" id="sleepT" name='sleepT'>
+            </div>
+            <div class="col-auto">
+                <label for="sleepQ" class="form-label">Sleep quality</label>
+                <div class="input-group-text">0</div>
+                <input type="range" class="form-range" min="0" max="5" step="1" id="sleepQ" name='sleepQ'>
+                <div class="input-group-text">5</div>
+            </div>
+            <div class="col-auto">
+                <label for="mood" class="form-label">Generic mood</label>
+                <input type="range" class="form-range" min="0" max="5" step="1" id="mood" name='mood'>
+            </div>
+            <button type="submit" class="btn btn-primary">Confirm</button>
+        </form>
+    </div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <form method="POST" action="/behavior/reporting/evening" class="row gy-2 gx-3 align-items-center">
+                <div class="col-auto">
+                <label for="date" class="form-label">Report date</label>
+                <input type="date" class="form-control" name="date" id="date" value="<%= reports.date %>" required>
+                </div>
+                <div class="col-auto">
+                    <label for="sportsT" class="form-label">Time spent on sports (in hours with decimals)</label>
+                    <input type="number" class="form-control" min="0" max="24" id="sportsT" name='sportsT'>
+                </div>
+                <div class="col-auto">
+                    <label for="exerciseT" class="form-label">Time spent on exercise (in hours with decimals)</label>
+                    <input type="number" class="form-control" min="0" max="24" id="exerciseT" name='exerciseT'>
+                </div>
+                <div class="col-auto">
+                    <label for="studyT" class="form-label">Time spent studying (in hours with decimals)</label>
+                    <input type="number" class="form-control" min="0" max="24" id="studyT" name='studyT'>
+                </div>
+                <div class="col-auto">
+                    <label for="eatingR" class="form-label">Regularity of eating (Meals in a day)</label>
+                    <input type="range" class="form-range" min="0" max="5" step="1" id="eatingR" name='eatingR'>
+                </div>
+                <div class="col-auto">
+                    <label for="eatingQ" class="form-label">Quality of eating (Meals in a day)</label>
+                    <input type="range" class="form-range" min="0" max="5" step="1" id="eatingQ" name='eatingQ'>
+                </div>
+                <div class="col-auto">
+                    <label for="mood" class="form-label">Generic mood</label>
+                    <input type="range" class="form-range" min="0" max="5" step="1" id="mood" name='mood'>
+                </div>
+                <button type="submit" class="btn btn-primary">Confirm</button>
+            </form>
+        </div>
+    </div>
+    <div class="mb-3">
+        <% if (errors && errors.length > 0) { %>
+            <% errors.forEach((error) => { %>
+                <div class="mb-3">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Error: </strong> <%= error %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            <% }); %>
+        <% } %>
+        <% if (notifs && notifs.length > 0) { %>
+            <% notifs.forEach((notif) => { %>
+                <div class="mb-3">
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <strong>Notification: </strong> <%= notif %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                </div>
+            <% }); %>
+        <% } %>
+    </div>
+    <div class="mb-3">
+        <% if (reports) { %>
+            <% if (reports.morning) { %>
+                <div class="alert alert-success" role="alert">
+                <strong>Reminder: </strong> You have already submitted your <strong>morning</strong> report for today!
+                </div>
+            <% }; %>
+            <% if (reports.evening) { %>
+                <div class="alert alert-success" role="alert">
+                <strong>Reminder: </strong> You have already submitted your <strong>evening</strong> report for today! 
+                </div>
+            <% }; %>
+        <% } %>
+    </div>
+</div>
+  
+<%- include('./partials/footer.ejs') %>
+
+
