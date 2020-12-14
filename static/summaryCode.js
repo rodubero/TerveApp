@@ -9,10 +9,20 @@ monthSelector.oninput = function() {
     retrieveMonthSummary(monthSelector.value);
 }
 
+this.onload = function () {
+    retrieveMonthSummary(0);
+    retrieveWeekSummary(0);
+}
+
 const createFillData = async(value, elementTag, description) => {
     let text ='';
     let text2 ='';
-    if(value){
+    if(!value || isNaN(value)){
+        const element = document.createElement('h5');
+        text = document.createTextNode('No data available');
+        element.appendChild(text);
+        document.querySelector(elementTag).replaceChildren(element);
+    } else {
         const element = document.createElement('h3');
         text = document.createTextNode(value);
         const element2 = document.createElement('h4');
@@ -20,11 +30,6 @@ const createFillData = async(value, elementTag, description) => {
         element.appendChild(text);
         element2.appendChild(text2);
         element.appendChild(element2);
-        document.querySelector(elementTag).replaceChildren(element);
-    } else {
-        const element = document.createElement('h5');
-        text = document.createTextNode('No data available');
-        element.appendChild(text);
         document.querySelector(elementTag).replaceChildren(element);
     }
 }

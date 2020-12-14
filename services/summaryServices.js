@@ -3,13 +3,13 @@ import { weekOfYear } from "../deps.js";
 
 const getWeek =async () =>{
     const today = new Date();
-    const weekn = weekOfYear(today);
+    const weekn = await weekOfYear(today);
     return weekn;
 }
 
 const getMonth =async () =>{
     const today = new Date();
-    const monthn = getMonth(today);
+    const monthn = today.getMonth();
     return monthn;
 }
 
@@ -70,7 +70,8 @@ const findDataBetweenDates = async(range, userId) => {
     const moodECount = await executeQuery("SELECT COUNT (genericMood) FROM evening WHERE (date BETWEEN $1 AND $2) AND userID = $3", range.from, range.to, userId);
     const sumMood = Number(await moodM.rowsOfObjects()[0].sum) + Number(await moodE.rowsOfObjects()[0].sum);
     const divMood = Number(await moodMCount.rowsOfObjects()[0].count) + Number(await moodECount.rowsOfObjects()[0].count);
-    res.mood = sumMood / divMood;
+    const moodAvgW = Number(sumMood / divMood);
+    res.mood = moodAvgW.toFixed(2);
     res.sleepD = await sleepD.rowsOfObjects()[0].round;
     res.sportsT = await sportsT.rowsOfObjects()[0].round;
     res.studyT = await studyT.rowsOfObjects()[0].round;
@@ -91,17 +92,18 @@ const findMonthData = async(month, userId) => {
 
     const year = await getYear();
 
-    const sleepD = await executeQuery("SELECT ROUND (AVG (sleepDuration)::numeric,1) FROM morning WHERE (EXTRACT(YEAR FROM date) = $1) AND (EXTRACT(MONTH FROM date) = $2) AND (userID = $3)", year, month, userId);
-    const sportsT = await executeQuery("SELECT ROUND (AVG (sportsTime)::numeric,1) FROM evening WHERE (EXTRACT(YEAR FROM date) = $1) AND (EXTRACT(MONTH FROM date) = $2) AND (userID = $3)", year, month, userId);
-    const studyT = await executeQuery("SELECT ROUND (AVG (studyTime)::numeric,1) FROM evening WHERE (EXTRACT(YEAR FROM date) = $1) AND (EXTRACT(MONTH FROM date) = $2) AND (userID = $3)", year, month, userId); 
-    const sleepQ = await executeQuery("SELECT ROUND (AVG (sleepQuality)::numeric,1) FROM morning WHERE (EXTRACT(YEAR FROM date) = $1) AND (EXTRACT(MONTH FROM date) = $2) AND (userID = $3)", year, month, userId);
+    const sleepD = await executeQuery("SELECT ROUND (AVG (sleepDuration)::numeric,2) FROM morning WHERE (EXTRACT(YEAR FROM date) = $1) AND (EXTRACT(MONTH FROM date) = $2) AND (userID = $3)", year, month, userId);
+    const sportsT = await executeQuery("SELECT ROUND (AVG (sportsTime)::numeric,2) FROM evening WHERE (EXTRACT(YEAR FROM date) = $1) AND (EXTRACT(MONTH FROM date) = $2) AND (userID = $3)", year, month, userId);
+    const studyT = await executeQuery("SELECT ROUND (AVG (studyTime)::numeric,2) FROM evening WHERE (EXTRACT(YEAR FROM date) = $1) AND (EXTRACT(MONTH FROM date) = $2) AND (userID = $3)", year, month, userId); 
+    const sleepQ = await executeQuery("SELECT ROUND (AVG (sleepQuality)::numeric,2) FROM morning WHERE (EXTRACT(YEAR FROM date) = $1) AND (EXTRACT(MONTH FROM date) = $2) AND (userID = $3)", year, month, userId);
     const moodM = await executeQuery("SELECT SUM (genericMood) FROM morning WHERE (EXTRACT(YEAR FROM date) = $1) AND (EXTRACT(MONTH FROM date) = $2) AND (userID = $3)", year, month, userId);
     const moodE = await executeQuery("SELECT SUM (genericMood) FROM evening WHERE (EXTRACT(YEAR FROM date) = $1) AND (EXTRACT(MONTH FROM date) = $2) AND (userID = $3)", year, month, userId);
     const moodMCount = await executeQuery("SELECT COUNT (genericMood) FROM morning WHERE (EXTRACT(YEAR FROM date) = $1) AND (EXTRACT(MONTH FROM date) = $2) AND (userID = $3)", year, month, userId);
     const moodECount = await executeQuery("SELECT COUNT (genericMood) FROM evening WHERE (EXTRACT(YEAR FROM date) = $1) AND (EXTRACT(MONTH FROM date) = $2) AND (userID = $3)", year, month, userId);
     const sumMood = Number(await moodM.rowsOfObjects()[0].sum) + Number(await moodE.rowsOfObjects()[0].sum);
     const divMood = Number(await moodMCount.rowsOfObjects()[0].count) + Number(await moodECount.rowsOfObjects()[0].count);
-    res.mood = sumMood / divMood;
+    const moodAvgM = Number(sumMood / divMood);
+    res.mood = moodAvgM.toFixed(2);
     res.sleepD = await sleepD.rowsOfObjects()[0].round;
     res.sportsT = await sportsT.rowsOfObjects()[0].round;
     res.studyT = await studyT.rowsOfObjects()[0].round;
