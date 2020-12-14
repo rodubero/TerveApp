@@ -7,6 +7,18 @@ const getWeek =async () =>{
     return weekn;
 }
 
+const getMonth =async () =>{
+    const today = new Date();
+    const monthn = getMonth(today);
+    return monthn;
+}
+
+const getYear =async () =>{
+    const today = new Date();
+    const yearn = today.getFullYear();
+    return yearn;
+}
+
 //function from https://codepen.io/Venugopal46/pen/WrxdLY
 
 Date.prototype.getWeek = function() {
@@ -47,10 +59,11 @@ const findDataBetweenDates = async(range, userId) => {
         mood : 0
     }
 
-    const sleepD = await executeQuery("SELECT AVG (sleepDuration) FROM morning WHERE (date BETWEEN $1 AND $2) AND userID = $3", range.from, range.to, userId);
-    const sportsT = await executeQuery("SELECT AVG (sportsTime) FROM evening WHERE (date BETWEEN $1 AND $2) AND userID = $3", range.from, range.to, userId);
-    const studyT = await executeQuery("SELECT AVG (studyTime) FROM evening WHERE (date BETWEEN $1 AND $2) AND userID = $3", range.from, range.to, userId); 
-    const sleepQ = await executeQuery("SELECT AVG (sleepQuality) FROM morning WHERE (date BETWEEN $1 AND $2) AND userID = $3", range.from, range.to, userId);
+
+    const sleepD = await executeQuery("SELECT ROUND (AVG (sleepDuration)::numeric,2) FROM morning WHERE (date BETWEEN $1 AND $2) AND userID = $3", range.from, range.to, userId);
+    const sportsT = await executeQuery("SELECT ROUND (AVG (sportsTime)::numeric,2) FROM evening WHERE (date BETWEEN $1 AND $2) AND userID = $3", range.from, range.to, userId);
+    const studyT = await executeQuery("SELECT ROUND (AVG (studyTime)::numeric,2) FROM evening WHERE (date BETWEEN $1 AND $2) AND userID = $3", range.from, range.to, userId); 
+    const sleepQ = await executeQuery("SELECT ROUND (AVG (sleepQuality)::numeric,2) FROM morning WHERE (date BETWEEN $1 AND $2) AND userID = $3", range.from, range.to, userId);
     const moodM = await executeQuery("SELECT SUM (genericMood) FROM morning WHERE (date BETWEEN $1 AND $2) AND userID = $3", range.from, range.to, userId);
     const moodE = await executeQuery("SELECT SUM (genericMood) FROM evening WHERE (date BETWEEN $1 AND $2) AND userID = $3", range.from, range.to, userId);
     const moodMCount = await executeQuery("SELECT COUNT (genericMood) FROM morning WHERE (date BETWEEN $1 AND $2) AND userID = $3", range.from, range.to, userId);
@@ -58,10 +71,10 @@ const findDataBetweenDates = async(range, userId) => {
     const sumMood = Number(await moodM.rowsOfObjects()[0].sum) + Number(await moodE.rowsOfObjects()[0].sum);
     const divMood = Number(await moodMCount.rowsOfObjects()[0].count) + Number(await moodECount.rowsOfObjects()[0].count);
     res.mood = sumMood / divMood;
-    res.sleepD = await sleepD.rowsOfObjects()[0].avg;
-    res.sportsT = await sportsT.rowsOfObjects()[0].avg;
-    res.studyT = await studyT.rowsOfObjects()[0].avg;
-    res.sleepQ = await sleepQ.rowsOfObjects()[0].avg;
+    res.sleepD = await sleepD.rowsOfObjects()[0].round;
+    res.sportsT = await sportsT.rowsOfObjects()[0].round;
+    res.studyT = await studyT.rowsOfObjects()[0].round;
+    res.sleepQ = await sleepQ.rowsOfObjects()[0].round;
 
     return res;
 }
@@ -76,21 +89,23 @@ const findMonthData = async(month, userId) => {
         mood : 0
     }
 
-    const sleepD = await executeQuery("SELECT AVG (sleepDuration) FROM morning WHERE (MONTH (date) = $1) AND userID = $2", month, userId);
-    const sportsT = await executeQuery("SELECT AVG (sportsTime) FROM evening WHERE (MONTH (date) = $1) AND userID = $2", month, userId);
-    const studyT = await executeQuery("SELECT AVG (studyTime) FROM evening WHERE (MONTH (date) = $1) AND userID = $2", month, userId); 
-    const sleepQ = await executeQuery("SELECT AVG (sleepQuality) FROM morning WHERE (MONTH (date) = $1) AND userID = $2", month, userId);
-    const moodM = await executeQuery("SELECT SUM (genericMood) FROM morning WHERE (MONTH (date) = $1) AND userID = $2", month, userId);
-    const moodE = await executeQuery("SELECT SUM (genericMood) FROM evening WHERE (MONTH (date) = $1) AND userID = $2", month, userId);
-    const moodMCount = await executeQuery("SELECT COUNT (genericMood) FROM morning WHERE (MONTH (date) = $1) AND userID = $2", month, userId);
-    const moodECount = await executeQuery("SELECT COUNT (genericMood) FROM evening WHERE (MONTH (date) = $1) AND userID = $2", month, userId);
+    const year = await getYear();
+
+    const sleepD = await executeQuery("SELECT ROUND (AVG (sleepDuration)::numeric,1) FROM morning WHERE (EXTRACT(YEAR FROM date) = $1) AND (EXTRACT(MONTH FROM date) = $2) AND (userID = $3)", year, month, userId);
+    const sportsT = await executeQuery("SELECT ROUND (AVG (sportsTime)::numeric,1) FROM evening WHERE (EXTRACT(YEAR FROM date) = $1) AND (EXTRACT(MONTH FROM date) = $2) AND (userID = $3)", year, month, userId);
+    const studyT = await executeQuery("SELECT ROUND (AVG (studyTime)::numeric,1) FROM evening WHERE (EXTRACT(YEAR FROM date) = $1) AND (EXTRACT(MONTH FROM date) = $2) AND (userID = $3)", year, month, userId); 
+    const sleepQ = await executeQuery("SELECT ROUND (AVG (sleepQuality)::numeric,1) FROM morning WHERE (EXTRACT(YEAR FROM date) = $1) AND (EXTRACT(MONTH FROM date) = $2) AND (userID = $3)", year, month, userId);
+    const moodM = await executeQuery("SELECT SUM (genericMood) FROM morning WHERE (EXTRACT(YEAR FROM date) = $1) AND (EXTRACT(MONTH FROM date) = $2) AND (userID = $3)", year, month, userId);
+    const moodE = await executeQuery("SELECT SUM (genericMood) FROM evening WHERE (EXTRACT(YEAR FROM date) = $1) AND (EXTRACT(MONTH FROM date) = $2) AND (userID = $3)", year, month, userId);
+    const moodMCount = await executeQuery("SELECT COUNT (genericMood) FROM morning WHERE (EXTRACT(YEAR FROM date) = $1) AND (EXTRACT(MONTH FROM date) = $2) AND (userID = $3)", year, month, userId);
+    const moodECount = await executeQuery("SELECT COUNT (genericMood) FROM evening WHERE (EXTRACT(YEAR FROM date) = $1) AND (EXTRACT(MONTH FROM date) = $2) AND (userID = $3)", year, month, userId);
     const sumMood = Number(await moodM.rowsOfObjects()[0].sum) + Number(await moodE.rowsOfObjects()[0].sum);
     const divMood = Number(await moodMCount.rowsOfObjects()[0].count) + Number(await moodECount.rowsOfObjects()[0].count);
     res.mood = sumMood / divMood;
-    res.sleepD = await sleepD.rowsOfObjects()[0].avg;
-    res.sportsT = await sportsT.rowsOfObjects()[0].avg;
-    res.studyT = await studyT.rowsOfObjects()[0].avg;
-    res.sleepQ = await sleepQ.rowsOfObjects()[0].avg;
+    res.sleepD = await sleepD.rowsOfObjects()[0].round;
+    res.sportsT = await sportsT.rowsOfObjects()[0].round;
+    res.studyT = await studyT.rowsOfObjects()[0].round;
+    res.sleepQ = await sleepQ.rowsOfObjects()[0].round;
 
     return res;
 }
@@ -98,4 +113,4 @@ const findMonthData = async(month, userId) => {
 
 
 
-export {getWeek, getWeekRange, findDataBetweenDates, findMonthData}
+export {getWeek, getMonth, getYear, getWeekRange, findDataBetweenDates, findMonthData}

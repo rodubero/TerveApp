@@ -56,7 +56,7 @@ const eveningReport = async({request, session, render}) => {
         userId : user.id,
         date : await paramet.get('dateE'),
         sportsTime : Number(await paramet.get('sportsT')),
-        studyingTime : Number(await paramet.get('studyQ')),
+        studyingTime : Number(await paramet.get('studyT')),
         eatingRegularity : Number(await paramet.get('eatingR')),
         mood : Number(await paramet.get('moodE'))
     }
