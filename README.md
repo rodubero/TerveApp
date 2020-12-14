@@ -58,5 +58,6 @@ Access the app online:
 
 URL:
 
+Duplicated records are not allowed by the system
 
 

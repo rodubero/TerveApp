@@ -15,13 +15,34 @@ const findReport = async(userId, date, morning) => {
     const reportObj = res.rowsOfObjects()[0];
     return reportObj;
     
-  }
+}
 
 const morningReport = async(report) => {
-    await executeQuery("INSERT INTO morning (userId, date, sleepDuration, sleepQuality, genericMood) VALUES ($1, $2, $3, $4, $5);", report.userId, report.date, report.sleepT, report.sleepQ, report.genericM);
+    await executeQuery("INSERT INTO morning (userId, date, sleepDuration, sleepQuality, genericMood) VALUES ($1, $2, $3, $4, $5);", report.userId, report.date, report.sleepDuration, report.sleepQuality, report.mood);
 }
 const eveningReport = async(report) => {
-    await executeQuery("INSERT INTO evening (userId, date, sportsTime, studyTime, eatingRegularity, genericMood) VALUES ($1, $2, $3, $4, $5, $6);", report.userId, report.date, report.sportsT, report.studyT, report.eatingR, report.genericM);
+    await executeQuery("INSERT INTO evening (userId, date, sportsTime, studyTime, eatingRegularity, genericMood) VALUES ($1, $2, $3, $4, $5, $6);", report.userId, report.date, report.sportsTime, report.studyingTime, report.eatingRegularity, report.mood);
+}
+
+const getBlankMorning = async()=> {
+    const report = {
+        date : new Date().toISOString().slice(0, 10),
+        sleepDuration : 0,
+        sleepQuality : 5,
+        mood : 5
+    }
+    return report;
+}
+
+const getBlankEvening = async()=> {
+    const report = {
+        date : new Date().toISOString().slice(0, 10),
+        sportsTime : 0,
+        studyingTime : 0,
+        eatingRegularity : 5,
+        mood : 5
+    }
+    return report;
 }
 
 const todayReport = async (id) => {
@@ -42,4 +63,4 @@ const todayReport = async (id) => {
     return reports;
 }
 
-export { findReport, morningReport, eveningReport, todayReport };
+export { findReport, morningReport, eveningReport, todayReport, getBlankEvening, getBlankMorning };

@@ -9,10 +9,10 @@
     <div class="row gy-1">
         <ul class="nav nav-tabs" id="homeTab" role="tablist">
             <li class="nav-item" role="presentation">
-              <a class="nav-link active" id="morning-tab" data-bs-toggle="tab" href="#morning" role="tab" aria-controls="morning" aria-selected="true">Morning</a>
+              <a class="nav-link active" id="morning-tab" data-bs-toggle="tab" href="#morning" role="tab" aria-controls="morning" aria-selected="false">Morning</a>
             </li>
             <li class="nav-item" role="presentation">
-              <a class="nav-link" id="eveninge-tab" data-bs-toggle="tab" href="#evening" role="tab" aria-controls="evening" aria-selected="false">Evening</a>
+              <a class="nav-link" id="evening-tab" data-bs-toggle="tab" href="#evening" role="tab" aria-controls="evening" aria-selected="true">Evening</a>
             </li>
         </ul>
         <div class="tab-content" id="reportTabContent">
@@ -20,8 +20,8 @@
                 <form method="POST" action="/behavior/reporting/morning" class="row justify-content-around">
                     <div class="col-auto gy-3 align-self-start">
                         <label for="date" class="form-label">Report date</label>
-                        <div class="col-10">
-                            <input type="date" class="form-control" name="dateM" id="dateM" value="<%= reports.date %>" required>
+                        <div class="col-12">
+                            <input type="date" class="form-control" name="dateM" id="dateM" value="<%= reports.date %>" min="1900-01-01" max="2500-12-31" required>
                         </div>
                     </div>
                     <div class="col-auto align-self-center">
@@ -29,19 +29,18 @@
                             <div class="col gy-3 align-self-center">
                                 <label for="sleepT" class="form-label">Sleep duration (In hours with 1 decimal)</label>
                                 <div class="col-md-4">
-                                    <input type="number" step="0.1" class="form-control" min="0" max="24" id="sleepT" name='sleepT' value="0" required>
+                                    <input type="number" step="0.1" class="form-control" min="0" max="24" id="sleepT" name='sleepT' value="<%= data.morning.sleepDuration %>" required>
                                 </div>
                             </div>
                         </div>
                         <div class="row gy-3 align-self-center ">
                             <div class="col gy-3 align-self-center">
-                                <label for="sleepQ" class="form-label">Sleep quality (0 is bad, 5 is like Rapunzel)</label>
+                                <label for="sleepQ" class="form-label">Sleep quality (0 is poor, 5 is like Rapunzel)</label>
                                 <div class="input-group">
                                     <div class="input-group-text" id="sleepQVal" >5</div>
                                     <div class="input-group-text"><input type="range" class="form-range" value="5" min="0" max="5" step="1" id="sleepQ" name='sleepQ'></div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                     <div class="col-auto gy-3 align-self-start">
@@ -60,8 +59,8 @@
                 <form method="POST" action="/behavior/reporting/evening" class="row justify-content-around">
                     <div class="col-auto gy-3 align-self-start">
                         <label for="date" class="form-label">Report date</label>
-                        <div class="col-10">
-                            <input type="date" class="form-control" name="dateE" id="dateE" value="<%= reports.date %>" required>
+                        <div class="col-12">
+                            <input type="date" class="form-control" name="dateE" id="dateE" value="<%= reports.date %>" min="1900-01-01" max="2500-12-31" required>
                         </div>
                     </div>
                     <div class="col-auto align-self-center">

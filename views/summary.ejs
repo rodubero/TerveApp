@@ -1,5 +1,162 @@
 <%- include('./partials/head.ejs') %>
+<script src="../../static/summaryCode.js" defer></script>
 <%- include('./partials/headerLogged.ejs') %>
-<h1>Summary</h1>
+<div class="row gy-2">
+    <div class="row gy-2">
+        <h1>Sumary dashboard</h1>
+        <p>Here is your summary. You can check it in a week or month period</p>
+    </div>
+    <div class="row gy-1">
+        <ul class="nav nav-tabs" id="homeTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a class="nav-link active" id="week-tab" data-bs-toggle="tab" href="#week" role="tab" aria-controls="week" aria-selected="true">Week</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="month-tab" data-bs-toggle="tab" href="#month" role="tab" aria-controls="month" aria-selected="false">Month</a>
+            </li>
+        </ul>
+        <div class="tab-content row gy-2" id="summaryTabContent">
+            <div class="tab-pane fade show active row gy-1" id="week" role="tabpanel" aria-labelledby="week-tab">
+                <div class="row gy-1">
+                    <div class="col-6">
+                        <span>Week number...</span>
+                        <select class="form-select" aria-label="Default select example" id="weekNumber">
+                            <% for(var i= 1; i < 53; i++) { %>
+                                <option value="<%= i %>"><%= i %></option>
+                            <% } %>
+                        </select>
+                    </div>
+                </div>
+                <div class="row gy-2">
+                    <div class="col-auto">
+                        <div class="tab-pane fade show active" id="week" role="tabpanel" aria-labelledby="week-tab">
+                            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                                <div class="card-header">Average sleep duration</div>
+                                    <h3 class="card-title" id="weekSleepT">0</h3><h5>Hrs</h5>
+                                  <p class="card-text" id="avgSleepD">Keep going!</p>
+                              </div>
+                        </div>
+                    </div>   
+                    <div class="col-auto">
+                        <div class="tab-pane fade show active" id="week" role="tabpanel" aria-labelledby="week-tab">
+                            <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                                <div class="card-header">Average time spent on sports and exercise</div>
+                                <div class="card-body">
+                                  <h5 class="card-title">0 Hrs</h5>
+                                  <p class="card-text" id="avgSleepD">Keep going!</p>
+                                </div>
+                              </div>
+                        </div>
+                    </div>  
+                    <div class="col-auto">
+                        <div class="tab-pane fade show active" id="week" role="tabpanel" aria-labelledby="week-tab">
+                            <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+                                <div class="card-header">Average time spent studying</div>
+                                <div class="card-body">
+                                  <h5 class="card-title">0 Hrs</h5>
+                                  <p class="card-text" id="avgSleepD">Keep going!</p>
+                                </div>
+                              </div>
+                        </div>
+                    </div>  
+                    <div class="col-auto">
+                        <div class="tab-pane fade show active" id="week" role="tabpanel" aria-labelledby="week-tab">
+                            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                                <div class="card-header">Average sleep quality</div>
+                                <div class="card-body">
+                                  <h3 class="card-title">0</h3><h5>/5 Points</h5>
+                                  <p class="card-text" id="avgSleepD">Keep going!</p>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="tab-pane fade show active" id="week" role="tabpanel" aria-labelledby="week-tab">
+                            <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+                                <div class="card-header">Average generic mood</div>
+                                <div class="card-body">
+                                    <h3 class="card-title">0</h3><h5>/5 Points</h5>
+                                    <p class="card-text" id="avgSleepD">Keep going!</p>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="tab-pane fade row gy-1" id="month" role="tabpanel" aria-labelledby="month-tab">
+                <div class="row gy-1">
+                    <div class="col-6">
+                        <label>Pick a month: </label>
+                        <select class="form-select" aria-label="Default select example" id="monthNumber">
+                            <% for(var i= 1; i < 13; i++) { %>
+                                <option value="<%= i %>"><%= i %></option>
+                            <% } %>
+                        </select>
+                    </div>
+                </div>
+                <div class="row gy-2">
+                    <div class="col-auto">
+                        <div class="tab-pane fade show active" id="week" role="tabpanel" aria-labelledby="week-tab">
+                            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                                <div class="card-header">Average sleep duration</div>
+                                <div class="card-body">
+                                  <h5 class="card-title">0 Hrs</h5>
+                                  <p class="card-text" id="avgSleepD">Keep going!</p>
+                                </div>
+                              </div>
+                        </div>
+                    </div>   
+                    <div class="col-auto">
+                        <div class="tab-pane fade show active" id="week" role="tabpanel" aria-labelledby="week-tab">
+                            <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                                <div class="card-header">Average time spent on sports and exercise</div>
+                                <div class="card-body">
+                                  <h5 class="card-title">0 Hrs</h5>
+                                  <p class="card-text" id="avgSleepD">Keep going!</p>
+                                </div>
+                              </div>
+                        </div>
+                    </div>  
+                    <div class="col-auto">
+                        <div class="tab-pane fade show active" id="week" role="tabpanel" aria-labelledby="week-tab">
+                            <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+                                <div class="card-header">Average time spent studying</div>
+                                <div class="card-body">
+                                  <h5 class="card-title">0 Hrs</h5>
+                                  <p class="card-text" id="avgSleepD">Keep going!</p>
+                                </div>
+                              </div>
+                        </div>
+                    </div>  
+                    <div class="col-auto">
+                        <div class="tab-pane fade show active" id="week" role="tabpanel" aria-labelledby="week-tab">
+                            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                                <div class="card-header">Average sleep quality</div>
+                                <div class="card-body">
+                                  <h5 class="card-title">0 </h5><a>/5 Points</a>
+                                  <p class="card-text" id="avgSleepD">Keep going!</p>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="tab-pane fade show active" id="week" role="tabpanel" aria-labelledby="week-tab">
+                            <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+                                <div class="card-header">Average generic mood</div>
+                                <div class="card-body">
+                                  <h5 class="card-title">0</h5><a>/5 Points</a>
+                                  <p class="card-text" id="avgSleepD">Keep going!</p>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+
+                </div>             
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <%- include('./partials/footer.ejs') %>

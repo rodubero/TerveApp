@@ -4,5 +4,5 @@ export { viewEngine, engineFactory, adapterFactory } from "https://raw.githubuse
 export { Session } from "https://deno.land/x/session@v1.0.0/mod.ts";
 export * as bcrypt from "https://deno.land/x/bcrypt@v0.2.4/mod.ts";
 export { time } from "https://denopkg.com/burhanahmeed/time.ts@v2.0.1/mod.ts";
-export { validate, required, isEmail, isDate, isNumber, numberBetween, minLength } from "https://deno.land/x/validasaur@v0.15.0/mod.ts";
+export { validate, required, isEmail, isDate, isNumber, minLength, numberBetween } from "https://deno.land/x/validasaur@v0.15.0/mod.ts";
 export { weekOfYear } from "https://deno.land/std@0.80.0/datetime/mod.ts";

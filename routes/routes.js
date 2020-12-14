@@ -15,8 +15,11 @@ router.get('/auth/logout', userCtrlr.logout);
 router.get('/auth/login', userCtrlr.login);
 router.get('/behavior/reporting', reportCtrlr.reporting);
 router.get('/behavior/summary', sumCtrlr.summary);
+router.get('/behavior/summary/:week', sumCtrlr.getDataDates);
 router.post('/behavior/reporting/morning', reportCtrlr.morningReport );
 router.post('/behavior/reporting/evening', reportCtrlr.eveningReport );
+router.get('/behavior/reporting/morning', reportCtrlr.reporting);
+router.get('/behavior/reporting/evening', reportCtrlr.reporting );
 
 
 

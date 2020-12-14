@@ -1,43 +1,47 @@
 <%- include('./partials/head.ejs') %>
 <%- include('./partials/header.ejs') %>
-<div class="mb-3">
-<h1>Welcome to Terve!</h1>
-<p>The app </p>
-<h2>Login</h2>
-
-  <form method="POST" action="/auth/login" style="width: 400px;">
-    <div class="mb-3">
-      <label for="email" class="form-label">Email address</label>
-      <input type="email" class="form-control" name="email" aria-describedby="emailHelp" id="email" value="<%= user.email %>" required>
-      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-    </div>
-    <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input type="password" class="form-control" name="password" id="password" minlength="4" required>
-    </div>
-    <% if (errors && errors.length > 0) { %>
-      <% errors.forEach((error) => { %>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <strong>Error: </strong> <%= error %>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-      <% }); %>
-    <% } %>
-    <% if (notifs && notifs.length > 0) { %>
-      <% notifs.forEach((notif) => { %>
-        <div class="alert alert-primary alert-dismissible fade show" role="alert">
-          <strong>Notification: </strong> <%= notif %>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-      <% }); %>
-    <% } %>
-    <button type="submit" class="btn btn-primary">Login!</button> 
-  </form>
-  <label for="register" class="button-label">Not a member yet?</label>
-  <div class="mb-3">
-    <a class="btn btn-secondary" href="/auth/registration" role="button" id="register">Register</a>
+<div class="row">
+  <div class="row">
+    <h1>Welcome to Terve!</h1>
+    <p>The app for your lifestyle</p>
   </div>
-
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <h2>Login</h2>
+      <form method="POST" action="/auth/login" class="col-12">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" name="email" aria-describedby="emailHelp" id="email" value="<%= user.email %>" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" name="password" id="password" minlength="4" required>
+        </div>
+        <% if (errors && errors.length > 0) { %>
+          <% errors.forEach((error) => { %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <strong>Error: </strong> <%= error %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <% }); %>
+        <% } %>
+        <% if (notifs && notifs.length > 0) { %>
+          <% notifs.forEach((notif) => { %>
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+              <strong>Notification: </strong> <%= notif %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <% }); %>
+        <% } %>
+        <button type="submit" class="btn btn-primary col-3">Login!</button> 
+      </form>
+      <div class="row">
+        <label for="register" class="button-label gy-3">Not a member yet?</label>
+        <div class="mb-3">
+        <a class="btn btn-secondary" href="/auth/registration" role="button" id="register">Register</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-  <%- include('./partials/footer.ejs') %>
+<%- include('./partials/footer.ejs') %>
