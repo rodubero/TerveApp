@@ -50,6 +50,10 @@ Use enviromental variables to insert your database credentials
 
 PGPORT=5432 PGDATABASE=my_db PGHOST=something_at_possibly.elephantsql.com etcetc deno run
 
+deno run --allow-all --unstable app.js
+
+
+
 URL: localhost:7777
 
 
