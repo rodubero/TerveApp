@@ -12,7 +12,6 @@ const getDataDates = async({session, params, response}) => {
     if (weekn === "0"){
         weekn = Number(await sumSrvcs.getWeek()) - 1;
     } 
-    console.log(weekn);
     const dates = sumSrvcs.getWeekRange(weekn, yearn);
     const result = await sumSrvcs.findDataBetweenDates(dates, user.id);
     response.body = {result : result, week : weekn, dates : dates};

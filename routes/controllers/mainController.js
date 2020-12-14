@@ -1,6 +1,9 @@
+import * as Srvcs from "../../services/generalServices.js";
+
 const home = async({render, session}) => {
-  const reguser = await session.get('user');
-  render('home.ejs', {reguser: reguser});
+  const user = await session.get('user');
+  const dataG = await Srvcs.dataGlimpse(user.id);
+  render('home.ejs', {reguser: user, today : dataG.today, yesterday : dataG.yesterday, message : dataG.message, todayBar: dataG.todayBar, yesterdayBar: dataG.yesterdayBar});
 };
 const index = async({render}) => {
   render('index.ejs');

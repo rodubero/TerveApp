@@ -32,8 +32,9 @@ const authenticateUser = async({request, session, render}) => {
                     id: userObj.id,
                     email: userObj.email
                 });
-                const reguser = await session.get('user');
-                render('home.ejs', {reguser: reguser});
+                const user = await session.get('user');
+                const dataG = await Srvcs.dataGlimpse(user.id);
+                render('home.ejs', {reguser: user, today : dataG.today, yesterday : dataG.yesterday, message : dataG.message, todayBar: dataG.todayBar, yesterdayBar: dataG.yesterdayBar});
                 return;
             }
         }
