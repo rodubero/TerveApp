@@ -3,6 +3,8 @@ import { router } from "./routes/routes.js";
 import * as middleware from './middlewares/middlewares.js';
 import { viewEngine, engineFactory, adapterFactory } from "./deps.js";
 
+
+
 const app = new Application();
 
 const session = new Session({ framework: "oak" });

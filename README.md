@@ -56,7 +56,7 @@ URL: localhost:7777
 
 Access the app online:
 
-URL:
+URL: https://terveapp.herokuapp.com/
 
 Duplicated records are not allowed by the system
 
