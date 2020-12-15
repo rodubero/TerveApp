@@ -74,11 +74,17 @@ Duplicated records reported for morning or evening are not allowed by the system
 ## Endpoints
 
 `/` Index
+
 `/home` Home
+
 `/auth/login` Authentication site
+
 `/auth/registration` Registration site
+
 `/auth/logout` Logs out
+
 `/behavior/reporting` Reporting site
+
 `/behavior/summary` Summary site
 
 ### API
