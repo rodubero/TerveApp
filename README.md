@@ -1,16 +1,25 @@
 # TerveApp
- CS/C3170
+CS/C3170
+
 Hi, this is Terve App an app for tracking your daily lifestyle info.
 
 You can track:
 
-Sleep duration, sleep quality, time spent on sports and exercise, time spent studying, regularity and quality of eating, and generic mood
+  * Sleep duration
+  * Sleep quality
+  * Time spent on sports and exercise
+  * Time spent studying
+  * Regularity and quality of eating
+  * Generic mood
 
-The app is developed on Deno- Oak v6.3.2 and PostgresDB
+The app uses Deno - Oak v6.3.2 and PostgresDB
 
-Prepare the database:
+## Deployment instructions
+
+### Prepare your database:
 
 Create the following tables:
+
 ```
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
@@ -45,19 +54,33 @@ CREATE TABLE evening (
 );
 ```
 
-Run the app locally:
+### Run the app locally:
 
 Use enviromental variables to insert your database credentials
 
 `PGPORT=$yourDBPortNumber PGHOST=yourDBHostURL PGDATABASE=yourDBName PGUSER=yourDBUser PGPASSWORD=yourDBPassword deno run --allow-all --unstable app.js`
 
-URL: localhost:7777
+URL: [localhost:7777](localhost:7777)
 
 
-Access the app online:
+### Access the app online:
 
 URL: [https://terveapp.herokuapp.com/](https://terveapp.herokuapp.com/)
 
+## Using the app
+
 Duplicated records reported for morning or evening are not allowed by the system.
 
+## Endpoints
 
+`/` Index
+`/home` Home
+`/auth/login` Authentication site
+`/auth/registration` Registration site
+`/auth/logout` Logs out
+`/behavior/reporting` Reporting site
+`/behavior/summary` Summary site
+
+### API
+
+Unfortunately the API is not ready yet
