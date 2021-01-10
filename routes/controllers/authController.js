@@ -20,12 +20,12 @@ const authenticateUser = async({request, session, render}) => {
     if (error.length === 0) {
         const userObj = await Srvcs.findUsr(data.email);
         if (!userObj.hasOwnProperty('id')){
-            error.push('User not found');
+            error.push('Wrong username or password');
         } else {
             const hash = userObj.password;
             const passwordCorrect = await bcrypt.compare(data.password, hash);
             if (!passwordCorrect) {
-                error.push('Wrong password');
+                error.push('Wrong username or password');
             } else {
                 await session.set('authenticated', true);
                 await session.set('user', {

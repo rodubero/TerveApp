@@ -89,4 +89,6 @@ Duplicated records reported for morning or evening are not allowed by the system
 
 ### API
 
-Unfortunately the API is not ready yet
+`/api/summary` Returns a JSON document with a range of dates (from, to) and the summary averaged over the last 7 days of sleep duration, time spent on sports and exercise, time spent studying, sleep quality, and generic mood
+
+`/api/summary/:year/:month/:day` Returns a JSON document with the requested date and a summary of averages for sleep duration, time spent on sports and exercise, time spent studying, sleep quality, and generic mood for the given date  (Insert the date requested on the URL fields :year, :month and :day)

@@ -34,6 +34,7 @@ Date.prototype.getWeek = function() {
 
 function getWeekRange(weekNo, y){
     //last week
+    y=Number(y)+1;
     var d1, numOfdaysPastSinceLastMonday, rangeIsFrom, rangeIsTo;
     d1 = new Date(''+y+'');
     numOfdaysPastSinceLastMonday = d1.getDay() - 1;
@@ -58,7 +59,7 @@ const findDataBetweenDates = async(range, userId) => {
         sleepQ : 0,
         mood : 0
     }
-
+    console.log(range);
 
     const sleepD = await executeQuery("SELECT ROUND (AVG (sleepDuration)::numeric,2) FROM morning WHERE (date BETWEEN $1 AND $2) AND userID = $3", range.from, range.to, userId);
     const sportsT = await executeQuery("SELECT ROUND (AVG (sportsTime)::numeric,2) FROM evening WHERE (date BETWEEN $1 AND $2) AND userID = $3", range.from, range.to, userId);
@@ -73,7 +74,7 @@ const findDataBetweenDates = async(range, userId) => {
     return res;
 }
 
-const findMonthData = async(month, userId) => {
+const findMonthData = async(month, year, userId) => {
 
     let res = {
         sleepD : 0,
@@ -82,9 +83,6 @@ const findMonthData = async(month, userId) => {
         sleepQ : 0,
         mood : 0
     }
-
-    const year = await getYear();
-
     const sleepD = await executeQuery("SELECT ROUND (AVG (sleepDuration)::numeric,2) FROM morning WHERE (EXTRACT(YEAR FROM date) = $1) AND (EXTRACT(MONTH FROM date) = $2) AND (userID = $3)", year, month, userId);
     const sportsT = await executeQuery("SELECT ROUND (AVG (sportsTime)::numeric,2) FROM evening WHERE (EXTRACT(YEAR FROM date) = $1) AND (EXTRACT(MONTH FROM date) = $2) AND (userID = $3)", year, month, userId);
     const studyT = await executeQuery("SELECT ROUND (AVG (studyTime)::numeric,2) FROM evening WHERE (EXTRACT(YEAR FROM date) = $1) AND (EXTRACT(MONTH FROM date) = $2) AND (userID = $3)", year, month, userId); 

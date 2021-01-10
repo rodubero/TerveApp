@@ -3,15 +3,18 @@ var monthSelector = document.getElementById("monthNumber");
 
 
 weekSelector.oninput = function() {
-    retrieveWeekSummary(weekSelector.value);
+    retrieveWeekSummary(weekSelector.value.slice(-2), weekSelector.value.slice(0,4));
 }
 monthSelector.oninput = function() {
-    retrieveMonthSummary(monthSelector.value);
+    retrieveMonthSummary(monthSelector.value.slice(-2), monthSelector.value.slice(0,4));
 }
 
-this.onload = function () {
-    retrieveMonthSummary(0);
-    retrieveWeekSummary(0);
+this.onload = async () => {
+    const todayDate = await retrieveDateParams();
+    weekSelector.value = todayDate.year+'-W'+todayDate.week;
+    monthSelector.value = todayDate.year+'-'+todayDate.month;
+    retrieveMonthSummary(todayDate.month, todayDate.year);
+    retrieveWeekSummary(todayDate.week, todayDate.year);
 }
 
 const createFillData = async(value, elementTag, description) => {
@@ -34,8 +37,14 @@ const createFillData = async(value, elementTag, description) => {
     }
 }
 
-const retrieveWeekSummary = async(week) => {
-    const response1 = await fetch(`/behavior/summary/week/${week}`);
+const retrieveDateParams = async() => {
+    const responseDate = await fetch(`/api/getDateParams`);
+    const dateJson = await responseDate.json();
+    return dateJson.result; 
+}
+
+const retrieveWeekSummary = async(week, year) => {
+    const response1 = await fetch(`/behavior/summary/week/${Number(week)}/${year}`);
     const weekJson = await response1.json();
     const weekData = weekJson.result;    
 
@@ -44,12 +53,11 @@ const retrieveWeekSummary = async(week) => {
     await createFillData(weekData.studyT, '#weekStudyT-container', 'Hrs');
     await createFillData(weekData.sleepQ, '#weekSleepQ-container', '/5 Points');
     await createFillData(weekData.mood, '#weekMood-container', '/5 Points');
-    weekSelector.selectedIndex = weekJson.week-1;
 
 }
 
-const retrieveMonthSummary = async(month) => { 
-    const response2 = await fetch(`/behavior/summary/month/${month}`);
+const retrieveMonthSummary = async(month, year) => { 
+    const response2 = await fetch(`/behavior/summary/month/${Number(month)}/${year}`);
     const monthJson = await response2.json();
     const monthData = monthJson.result;    
 
@@ -58,6 +66,5 @@ const retrieveMonthSummary = async(month) => {
     await createFillData(monthData.studyT, '#monthStudyT-container', 'Hrs');
     await createFillData(monthData.sleepQ, '#monthSleepQ-container', '/5 Points');
     await createFillData(monthData.mood, '#monthMood-container', '/5 Points');
-    monthSelector.selectedIndex = monthJson.month-1;
 
 }
